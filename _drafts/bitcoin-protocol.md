@@ -1,0 +1,34 @@
+---
+layout: post
+tags : [bitcoin, anaylysis, bitcoin-protocol]
+---
+{% include JB/setup %}
+
+I have been trying to understand Bitcoin protocol. The original paper from Nakamoto Satoshi, (<http://bitcoin.org/bitcoin.pdf>) gave a very good picture of the protocol, as also the initial announcement thread(<http://www.mail-archive.com/cryptography@metzdowd.com/msg09959.html>) and of course the wonderful bitcoin wiki on some aspects of the implementation. (<https://en.bitcoin.it/wiki/Main_Page>). Do you know bitcoin is more general than transfer of money? It can be used to enforce contracts <https://en.bitcoin.it/wiki/Contracts> And yeah, this was one of the visions of Satoshi! This beautiful idea alone sold me on bit coins. Contracts without needing a central arbiter to enforce is awesome!!
+
+I strongly recommend against reading any other popular blog posts on this!  Yep, including this one! ;) I usually lose interest on reading top few paragraphs, as they seem to assume, I am new to Earth! :P
+
+At a high level, bitcoin works as follows:
+
+1. Assume, you have a coin to transfer, you make a simple document, saying that you are transferring to this "address", then you sign it with your private key. This signing proves the transfer of ownership. And when the receiver wants to spend his money, he produces this transaction(which can be verified as being transferred to him) and signs it with the next recipient's address. This is a very well-understood idea. Nothing new here.
+
+2. Given that transfer of ownership is secure, the issue bitcoin should tackle is the idea of double spending. That is, if you own a coin(or any other entity for that matter), you can send it to 2 different people. And unless you have a global picture of all transactions, you won't be able to deduce this. In fact, this is in some sense, how it is solved in the current world -- with a centralized entity(bank) being aware of what you have got and arbitrating transactions. It necessarily sequentializes the transaction and avoid double spending. So, bitcoin protocol says exactly this: Instead of a single guy called a bank have a global picture, let everyone of us have a global picture! :P 
+
+And you need some necessary sequentialization of transaction here as well.
+Sequencing transaction is no big deal as well. We can deterministically lexicographically order 2 transactions(based on say sha1) of a single parent transaction and take the one thats lexicographically lesser as valid. The obvious issue is, if 2 different subset of nodes receive different transactions, then depending on what node you query, you may find different state of the world valid. But this is nota  big problem. Given sufficient time, only one transactions "chain" will become valid. Things "eventually" get consistent. But a deeper issue is that, if i find a transaction sha1, which is < than the current one such that i could send it to another address i own, then this new transaction will prevail and this can happen anytime in future. So, what has happened here is the corruption of history. And the canonical weapon against such corruption in system design is checksum! :) Checksum the history periodically, so that any mutation to it is deduced. But who checksums? We need a global ordering on transactions made, if every node should agree on a checksum. And there is no way to ensure that, without assuming reliable delivery of messages within a time. So, the usual solution is let one guy checksum a group of transaction and propose it to be appended to the previous group which everyone else must "agree" upon. Yay! Distributed consensus issue! :P Yeah, we can solve it by electing a master and all that. So, the master is the source of truth now? Can we afford to do this? What if the master is compromised and it changes the whole transaction history, by checksumming a new history of transactions?
+
+Well, here is where the beauty of bitcoin comes in. It is not solving just ordering issue, it is solving the "irrefutable" ordering issue!  Our reasoning upto the point of, taking checksum is correct. Bitcoin does exactly that. But the way it solves what is checksummed and who is checksuming and how to prevent re-write of history is a master-piece! 
+So, each node executes the following algorithm:
+
+It groups a bunch of transactions together and checks that each is "valid". It appends these records to the previous block and tries to compute a "nonce" such that <nonce, previous_block_digest, current_block_digest> has some feature: Say the sha1 of that record should have n-zeros in its MSB in binary notation. This is a computationally hard problem and the only way to solve it, at least for now is to try various values of nonces. Once a single node finds such a nonce, it broadcasts it to the whole network. Other nodes in the network can verify that the "nonce" computed is correct, very trivially and that each transition in the block is valid and accepts this "transaction block" as the next block in the "global" chain of transaction. Note that, there is no assumption on what transactions are grouped together. Each node can group any set of transactions together. The only thing that matters is that within a group, all transactions must be a "valid" one. By validity, we mean, 2 transactions in the group are not double-spending and that each transaction corresponds to a "valid" previous transaction, that has already been accepted to the global chain of transactions. 
+
+Yeah, this is extremely beautiful! :) 
+
+This approach is what is called: <http://en.wikipedia.org/wiki/Proof-of-work_system> and has been proposed to identify non-malicious nodes and can act as a natural rate-limiter etc.
+But applying it to a consensus problem seems new!
+
+The essential principle that can be culled out here is that:
+
+Each node proposes a particular value, but it doesn't broadcast the value directly. It does a difficult "proof of work"  problem which is computationally harder to solve, but is easy to verify. Every other "good" nodes, accept this value after verification. Abstractly, I see this "hard to solve" part, as a generalization of signing by a "private key"(which solves Byzantine failure problem to a very high probability of success), in a single player system. Since, multiple people here, have to agree on a history and satisfy the non-repudiation of history, i think we need a "hard to solve" problem, so that nobody can repudiate it later easily. Well, that is, at least, how i see it. And yeah, this is pretty informal way to put it. Becoz i am not able to see the full abstract picture yet! :P
+
+I think, this particular paradigm is pretty beautiful and worthy of richer theory and culling out more abstract principles from this, which can be reused in other situations! Go bitcoin, the protocol! :)
