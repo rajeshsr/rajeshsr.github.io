@@ -23,9 +23,7 @@ Apparently Prosecutors are incentivized to prosecute(a no brainer ah?!), rather 
 Although I don't understand/appreciate the final conclusion:  
   
 ==  
-  
 I wager the Justice Department understood Aaron's suicidal and depression vulnerabilities better than ANYONE— because they make a living, a strategy, going after the weakest links, exploiting psychological deficit and isolation at EVERY TURN. Aaron had more to give the world than their whole "Just-Us"department wrapped up in a bow, but that's the least of their concerns.  
-  
 ==  
   
 But the case in point is that a lot of weak people are targeted for realtively minor crimes, just to further the career as a Lawyer!  
