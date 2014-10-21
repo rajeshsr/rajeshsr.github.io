@@ -5,7 +5,7 @@ tags : [arron-swartz, society, law, ethics, change]
 {% include JB/setup %}  
   
   
-Interesting read: http://www.volokh.com/2013/01/14/aaron-swartz-charges/  
+Interesting read: <http://www.volokh.com/2013/01/14/aaron-swartz-charges/>  
   
 What people often forget is that there's this thing called Law and people of the society just follow the Law. And Law by no means have to, in fact most times doesn't reflect your idea or even the majority's idea or even the most "optimal"(objective function being human survival and excellence?) notion of ethics. That's one reason why lots of "unwritten" conventions are wide-spread in human society: Various codes of honors, implicitly understood and inferred behaviors, based on things like the awesome Golden Rule: Do unto thy neighbors as you would have them do unto you.  
 So, all the Courts decide is whether or not things are based on Law. All the anger against the Prosecution just doesn't make sense, once you realize that. These are just people following orders/oath/rules -- Making a honest living based on your screwed-up system!  
@@ -17,7 +17,7 @@ As you can see, these are questions of ethics, not of Law. I don't think this is
   
 In an ideal world, Aaron would not have had to display this Activism. May be his case will get us to that world -- with a new Law that emphasizes the importance of Knowledge Distribution, keeping in mind the interests of the Value Creators, in this case the Paper authors and reviewers while giving reasonable status for Content Distributors like Journal sites. I have always felt these are middle-men, who definitely deserves to be treated as site-hosters and get profit like that, rather than claim a lion's share!  
   
-This is another interesting read: http://susiebright.blogs.com/susie_brights_journal_/2013/01/i-have-something-to-say-about-aaron-swartzs-suicide-and-the-special-way-the-us-justice-dept-hounds-p.html  
+This is another interesting read: <http://susiebright.blogs.com/susie_brights_journal_/2013/01/i-have-something-to-say-about-aaron-swartzs-suicide-and-the-special-way-the-us-justice-dept-hounds-p.html>  
 Apparently Prosecutors are incentivized to prosecute(a no brainer ah?!), rather than uphold "justice"! :P  
   
 Although I don't understand/appreciate the final conclusion:  
